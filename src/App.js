@@ -8,11 +8,7 @@ class App extends Component {
     super(props);
     this.state = {
       data: [],
-      // toggleMenuClass: 'app-invisibile'
     }
-    this.menuOpen = this.menuOpen.bind(this);
-    this.menuClose = this.menuClose.bind(this);
-    this.toggleMenu = this.toggleMenu.bind(this);
     this.getData = this.getData.bind(this);
   }
 
