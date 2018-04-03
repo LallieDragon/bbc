@@ -13,16 +13,15 @@ class App extends Component {
     this.menuOpen = this.menuOpen.bind(this);
     this.menuClose = this.menuClose.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.getData = this.getData.bind(this);
   }
 
-componenetDidMount() {
+getData() {
   client.getEntries()
   .then(entries => {
     let tempArray = [];
     entries.items.forEach(entry => {
-      if (entry.fields.title) {
         tempArray.push(entry);
-      }
     });
     this.setState({
       data: tempArray
@@ -31,26 +30,12 @@ componenetDidMount() {
   });
 }
 
-  menuOpen() {
-  this.setState({
-    toggledMenuClass: 'app-menu-showing'
-  });
-}
-
-menuClose() {
-  this.setState({
-    toggledMenuClass: 'app-invisible'
-  });
-}
-
-toggleMenu() {
-  (this.state.toggledMenuClass === 'app-invisible') ? this.menuOpen() : this.menuClose();
-}
-
   render() {
+    console.log(this.state)
+
     return (
       <div className="App">
-        <NavContainer data={ this.data }/>
+        <NavContainer data={ this.state.data }/>
       </div>
     );
   }
