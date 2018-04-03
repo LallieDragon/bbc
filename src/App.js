@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { NavContainer } from './components/nav'
-import client from './contentfulClient.js';
+import { initClient } from './contentfulClient'
 
 class App extends Component {
   constructor(props){
@@ -9,22 +9,23 @@ class App extends Component {
     this.state = {
       data: [],
     }
-    this.getData = this.getData.bind(this);
   }
 
-getData() {
-  client.getEntries()
-  .then(entries => {
-    let tempArray = [];
-    entries.items.forEach(entry => {
-        tempArray.push(entry);
-    });
-    this.setState({
-      data: tempArray
-    });
-    console.log(this.state.data)
-  });
-}
+  componentDidMount() {
+    var client = initClient();
+    var tempArray = [];
+
+    client.getEntries()
+    .then((response) => {
+      response.items.forEach(data => {
+        tempArray.push(data.fields);
+      })
+      this.setState({ data: tempArray})
+      console.log(response.items)
+      console.log(this.state.data, 'this is state')
+    })
+    .catch(console.error)
+  }
 
   render() {
     console.log(this.state)
