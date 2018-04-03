@@ -16,20 +16,20 @@ class App extends Component {
   }
 
 componenetDidMount() {
-    client.getEntries()
-    .then(entries => {
-      let tempArr = [];
-      entries.fields.forEach(entry => {
-        if (entry.fields) {
-          tempArr.push(entry);
-        }
-      })
-      .catch(console.error);
-      this.setState({
-        data: tempArr
-      });
+  client.getEntries()
+  .then(entries => {
+    let tempArray = [];
+    entries.items.forEach(entry => {
+      if (entry.fields.title) {
+        tempArray.push(entry);
+      }
     });
-  }
+    this.setState({
+      data: tempArray
+    });
+    console.log(this.state.data)
+  });
+}
 
   menuOpen() {
   this.setState({
