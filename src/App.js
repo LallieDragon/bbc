@@ -1,38 +1,42 @@
 import React, { Component } from 'react';
-import './App.css';
-import { NavContainer } from './components/nav'
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+  NavLink
+} from 'react-router-dom';
+import HeaderContainer from './components/common/HeaderContainer'
 import { initClient } from './contentfulClient'
+import './App.css';
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
       data: [],
+      catTitles: []
     }
   }
 
   componentDidMount() {
     var client = initClient();
-    var tempArray = [];
-
-    client.getEntries()
+    client.getContentTypes()
     .then((response) => {
-      response.items.forEach(data => {
-        tempArray.push(data.fields);
-      })
-      this.setState({ data: tempArray})
-      console.log(response.items)
-      console.log(this.state.data, 'this is state')
+      var tempCatArray = [];
+      for (let i = 0; i < response.items.length; i++) {
+        tempCatArray.push(response.items[i].name);
+        tempCatArray.sort()
+      }
+      this.setState ({ catTitles: tempCatArray })
     })
     .catch(console.error)
-  }
+}
 
   render() {
     console.log(this.state)
-
     return (
-      <div className="App">
-        <NavContainer data={ this.state.data }/>
+      <div className="app">
+        <HeaderContainer props={ this.state.catTitles } />
       </div>
     );
   }

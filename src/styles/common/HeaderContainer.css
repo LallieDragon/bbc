@@ -1,0 +1,14 @@
+#header-container {
+  display: flex;
+  flex: 1;
+  height: 300px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #ECE8E1;
+}
+
+img {
+  height: 250px;
+  width: 250px;
+}

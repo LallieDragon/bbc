@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
-import {
-  HashRouter as Router,
-  NavLink
-} from 'react-router-dom';
-
-import '../../styles/nav/NavBar.css';
+import { NavButton } from './index.js';
+import '../../styles/nav/NavBar.css'
 
 class NavBar extends Component {
+  constructor(props) {
+    super(props);
+    this.renderNavButtons = this.renderNavButtons.bind(this)
+  }
+
+  renderNavButtons() {
+    return this.props.catTitles.props.map(catTitles =>
+      <NavButton id={catTitles} text={catTitles} key={catTitles} />);
+  }
+
   render() {
+    console.log(this.props.catTitles.props)
     return (
-      <div className='nav-bar'>
-        <Router onUpdate={() => window.scrollTo(0, 0)}>
-          <nav>
-            <NavLink className='navlink homelink' exact to='/'>
-              <img id='logo' src={require('../../images/logo.png')} alt='logo' />
-            </NavLink>
-          </nav>
-        </Router>
+      <div id='nav-buttons-container'>
+         {this.renderNavButtons()}
       </div>
-    )
+    );
   }
 }
 
-export default NavBar;
+export { NavBar };
