@@ -12,3 +12,13 @@ img {
   height: 250px;
   width: 250px;
 }
+
+nav {
+  display: flex;
+  flex-direction: row;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
